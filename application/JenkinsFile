@@ -44,15 +44,15 @@ pipeline {
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
-        dir('application') {
-        // read the yaml file here
-        }
         script {
               	// def readImageTag = readYaml file '/src/main/resources/bootstrap.yml'
-            def yamlText = readFile 'src/main/resources/bootstrap.yml'
+            sh 'cd application/src/main/resources/'
+            sh pwd
+            def yamlText = readFile 'bootstrap.yml'
             def yaml = new org.yaml.snakeyaml.Yaml().load(yamlText)
             def readImageTag = yaml['tag']
-            sh 'cd application && docker build -t ${readImageTag} .'
+
+            sh 'cd ../../../application && docker build -t ${readImageTag} .'
             def dockerImage = docker.image("${readImageTag}")
             docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
                 dockerImage.push()
