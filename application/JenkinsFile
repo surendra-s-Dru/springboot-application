@@ -46,7 +46,7 @@ pipeline {
       steps {
         script {
               	// def readImageTag = readYaml file '/src/main/resources/bootstrap.yml'
-            def yamlText = readFile 'applicationsrc/main/resources/bootstrap.yml'
+            def yamlText = readFile '/application/src/main/resources/bootstrap.yml'
             def yaml = new org.yaml.snakeyaml.Yaml().load(yamlText)
             def readImageTag = yaml['tag']
             sh 'cd application && docker build -t ${readImageTag} .'
