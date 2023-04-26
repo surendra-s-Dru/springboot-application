@@ -1,3 +1,6 @@
+@PluginModule PipelineMavenPlugin plugin
+
+
 pipeline {
    agent
    {
