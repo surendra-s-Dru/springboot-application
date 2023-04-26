@@ -41,7 +41,8 @@ pipeline {
     stage('Build and Push Docker Image') {
       environment {
         readImageTag = readMavenPom file: 'application/pom.xml'
-        DOCKER_IMAGE = "test-server:${readImageTag}"
+
+        DOCKER_IMAGE = "test-server:${readImageTag.version}"
         DOCKERFILE_LOCATION = "springboot-application/application/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
@@ -52,7 +53,7 @@ pipeline {
             // def yamlText = readFile 'bootstrap.yml'
             // def yaml = new org.yaml.snakeyaml.Yaml().load(yamlText)
             // def readImageTag = yaml['tag']
-            def readImageTag = readMavenPom file: 'application/pom.xml'
+            // def readImageTag = readMavenPom file: 'application/pom.xml'
             
             sh 'cd application && docker build -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
