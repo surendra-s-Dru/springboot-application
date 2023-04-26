@@ -6,8 +6,7 @@
 
     <groupId>com.surendra</groupId>
     <artifactId>spring-boot-demo</artifactId>
-    <version>1.0</version>
-
+    <version>1.40.5</version>
     <name>spring-boot-demo</name>
     <url></url>
 
